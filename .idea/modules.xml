@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-common/boss-bes-common.iml" filepath="$PROJECT_DIR$/boss-bes-common/boss-bes-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-common/boss-bes-common-exception-logging/boss-bes-common-exception-logging.iml" filepath="$PROJECT_DIR$/boss-bes-common/boss-bes-common-exception-logging/boss-bes-common-exception-logging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-common/boss-bes-common-logging/boss-bes-common-logging.iml" filepath="$PROJECT_DIR$/boss-bes-common/boss-bes-common-logging/boss-bes-common-logging.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-common/boss-bes-common-utils/boss-bes-common-utils.iml" filepath="$PROJECT_DIR$/boss-bes-common/boss-bes-common-utils/boss-bes-common-utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-core/boss-bes-core.iml" filepath="$PROJECT_DIR$/boss-bes-core/boss-bes-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-core/boss-bes-core-api-version/boss-bes-core-api-version.iml" filepath="$PROJECT_DIR$/boss-bes-core/boss-bes-core-api-version/boss-bes-core-api-version.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-core/boss-bes-core-dao-aop/boss-bes-core-dao-aop.iml" filepath="$PROJECT_DIR$/boss-bes-core/boss-bes-core-dao-aop/boss-bes-core-dao-aop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-core/boss-bes-core-data/boss-bes-core-data.iml" filepath="$PROJECT_DIR$/boss-bes-core/boss-bes-core-data/boss-bes-core-data.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-gateway/boss-bes-gateway.iml" filepath="$PROJECT_DIR$/boss-bes-gateway/boss-bes-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-iframe-spring-cloud-starter.iml" filepath="$PROJECT_DIR$/boss-bes-iframe-spring-cloud-starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/boss-bes-spring-cloud-starter/boss-bes-spring-cloud-starter.iml" filepath="$PROJECT_DIR$/boss-bes-spring-cloud-starter/boss-bes-spring-cloud-starter.iml" />
+    </modules>
+  </component>
+</project>

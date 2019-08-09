@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="boss-bes-core-data" />
+        <module name="boss-bes-common-utils" />
+        <module name="boss-bes-gateway" />
+        <module name="boss-bes-common-logging" />
+        <module name="boss-bes-common-exception-logging" />
+        <module name="boss-bes-core-dao-aop" />
+        <module name="boss-bes-spring-cloud-starter" />
+        <module name="boss-bes-core-api-version" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="boss-bes-common" target="1.5" />
+      <module name="boss-bes-common-exception-logging" target="1.5" />
+      <module name="boss-bes-common-logging" target="1.5" />
+      <module name="boss-bes-common-utils" target="1.5" />
+      <module name="boss-bes-core" target="1.5" />
+      <module name="boss-bes-core-api-version" target="1.5" />
+      <module name="boss-bes-core-dao-aop" target="1.5" />
+      <module name="boss-bes-core-data" target="1.5" />
+      <module name="boss-bes-gateway" target="1.5" />
+      <module name="boss-bes-iframe-spring-cloud-starter" target="1.5" />
+      <module name="boss-bes-spring-cloud-starter" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
