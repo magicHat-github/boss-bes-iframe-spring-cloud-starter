@@ -9,24 +9,29 @@ import java.io.Serializable;
  */
 public class CommonResponse<T> implements Serializable {
     /**
-     * head，应用程序版本，不允许为空
+     * head
+     * 应用程序版本，不允许为空
      */
     private String version;
     /**
-     * head，应答码
+     * head
+     * 应答码
      */
     private String code;
     /**
-     * head，消息
+     * head
+     * 消息
      */
     private String msg;
     /**
-     * head，加密标志，1标记加密，0标记不加密
+     * head
+     * 加密标志，1标记加密，0标记不加密
      */
     private Integer crypt;
 
     /**
-     * body，即JSONObject，需要传出的业务对象
+     * body
+     * 即JSONObject，需要传出的业务对象
      */
     private T data;
 
@@ -77,5 +82,21 @@ public class CommonResponse<T> implements Serializable {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public Integer getCrypt() {
+        return crypt;
+    }
+
+    public void setCrypt(Integer crypt) {
+        this.crypt = crypt;
     }
 }

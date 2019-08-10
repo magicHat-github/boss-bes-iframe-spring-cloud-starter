@@ -50,15 +50,15 @@ public class ResponseUtil {
     }
 
     public static <T> CommonResponse buildError(T data) {
-        return new CommonResponse<T>(ResultEnum.DATABASE_ERROR, data);
+        return new CommonResponse<T>(ResultEnum.DEFAULT_ERROR, data);
     }
 
     public static CommonResponse buildError() {
-        return new CommonResponse(ResultEnum.DATABASE_ERROR);
+        return new CommonResponse(ResultEnum.DEFAULT_ERROR);
     }
 
     public static CommonResponse buildError(String msg) {
-        return new CommonResponse(ResultEnum.DATABASE_ERROR.getCode(), msg);
+        return new CommonResponse(ResultEnum.DEFAULT_ERROR.getCode(), msg);
     }
 
     public static CommonResponse buildError(String code, String msg) {
