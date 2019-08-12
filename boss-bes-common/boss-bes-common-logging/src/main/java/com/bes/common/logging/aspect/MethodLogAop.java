@@ -39,8 +39,10 @@ public class MethodLogAop {
     public void after(MethodLog log){
         System.out.println(log.value());
     }
-    @Around(value = "pointCut()")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable{
+    @Around(value = "pointCut()&&@annotation(logAnnotation)",argNames = "joinPoint,logAnnotation")
+    public Object around(ProceedingJoinPoint joinPoint,MethodLog logAnnotation) throws Throwable{
+        // 获得注解上的值
+        String annotationValue = logAnnotation.value();
         // 调用方法前的日志
         String className = joinPoint.getTarget().getClass().getName();
         String method = joinPoint.getSignature().getName();
