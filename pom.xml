@@ -11,7 +11,6 @@
     <modules>
         <module>boss-bes-common</module>
         <module>boss-bes-core</module>
-        <module>boss-bes-gateway</module>
     </modules>
 
     <properties>
