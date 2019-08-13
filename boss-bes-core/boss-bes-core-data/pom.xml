@@ -11,4 +11,12 @@
 
     <artifactId>boss-bes-core-data</artifactId>
 
+    <dependencies>
+        <!--spring-web-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.1.8.RELEASE</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -10,6 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>boss-bes-common-exception-logging</artifactId>
-
+    <dependencies>
+        <!-- 注入统一异常验证依赖 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.0.BUILD-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <!-- 引用基础数据服务-->
+        <dependency>
+            <groupId>com.bosssoft.cloud</groupId>
+            <artifactId>boss-bes-core-data</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

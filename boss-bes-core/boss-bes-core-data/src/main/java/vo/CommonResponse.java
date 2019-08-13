@@ -64,4 +64,12 @@ public class CommonResponse<T> implements Serializable {
     public void setBody(T body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        return "CommonResponse{" +
+                "head=" + head +
+                ", body=" + body +
+                '}';
+    }
 }
