@@ -23,7 +23,7 @@ public class MethodLogAop {
     /**
      * 日志输出对象
      */
-    private Logger logger = LoggerFactory.getLogger(MethodLog.class);
+    private Logger logger = LoggerFactory.getLogger(MethodLogAop.class);
     /**
      * 时间工具对象
      */
