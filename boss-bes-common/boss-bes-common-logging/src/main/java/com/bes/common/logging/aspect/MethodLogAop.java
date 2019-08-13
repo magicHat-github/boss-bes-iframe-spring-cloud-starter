@@ -35,10 +35,6 @@ public class MethodLogAop {
     @Pointcut("@annotation(com.bes.common.logging.annotation.MethodLog)")
     public void pointCut(){}
 
-    @After(value = "@annotation(log)",argNames = "log")
-    public void after(MethodLog log){
-        System.out.println(log.value());
-    }
     @Around(value = "pointCut()&&@annotation(logAnnotation)",argNames = "joinPoint,logAnnotation")
     public Object around(ProceedingJoinPoint joinPoint,MethodLog logAnnotation) throws Throwable{
         // 获得注解上的值
@@ -60,7 +56,14 @@ public class MethodLogAop {
          * 开始的时间戳
          */
         long startTimeTamp = System.currentTimeMillis();
-        Object ret = joinPoint.proceed();
+        Object ret = null;
+        try {
+             ret = joinPoint.proceed();
+        }catch (Exception e){
+            // 记录异常日志之后将异常抛出
+            logger.error(e.getMessage(),e);
+            throw  e;
+        }
         long endTimeTamp = System.currentTimeMillis();
         /*
          * 计算运行时间
