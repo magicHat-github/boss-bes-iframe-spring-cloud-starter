@@ -1,7 +1,7 @@
 package vo.head;
 
 /**
- * 供后续迭代中使用，当前版本中没有使用到
+ * 约定的请求报文头
  *
  * @author 何家伟
  * @version 1.0
@@ -28,6 +28,18 @@ public class CommonRequestHead {
      * 设备类型
      */
     private Integer deviceType;
+    /**
+     * 加密方式
+     */
+    private Integer crypt;
+
+    public Integer getCrypt() {
+        return crypt;
+    }
+
+    public void setCrypt(Integer crypt) {
+        this.crypt = crypt;
+    }
 
     public String getVersion() {
         return version;
