@@ -60,7 +60,8 @@ public class Handle {
 
             return ResponseUtil.buildError("1000",errorMessages.toString());
         } else {
-            logger.error("!!!系统异常!!!", e);
+
+            logger.error("!!!系统异常!!!，{}", e.getMessage());
             return ResponseUtil.buildError(ResultEnum.SYSTEM_ERROR);
         }
     }
