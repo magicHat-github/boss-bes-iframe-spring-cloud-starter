@@ -1,20 +1,24 @@
 package vo.head;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * 约定的请求报文头
  *
  * @author 何家伟
- * @version 1.0
- * @date 2019-08-12 13:33
+ * @version 2.0
+ * @date 2019-08-14 22:33
  */
 public class CommonRequestHead {
     /**
      * 应用版本
      */
+    @NotBlank(message = "request的Head中版本信息不允许为空")
     private String version;
     /**
      * token
      */
+    @NotBlank(message = "request的Head中token不允许为空")
     private String token;
     /**
      * 业务类型

@@ -2,30 +2,36 @@ package vo;
 
 import vo.head.CommonRequestHead;
 
-import java.util.Map;
+import javax.validation.Valid;
 
 /**
  * 约定的请求报文
- * body 部分使用示例如下：
- *   JSONObject jsonObject = new JSONObject(commonRequest.getBody());
- *   DataDTO dataDTO = JSON.toJavaObject(jsonObject, DataDTO.class);
+ * 在Controller层的方法中，传入时需指定body应该属于的DTO类型，同时增加Valid注解启用head和DTO的参数校验
+ * 示例：
+ *  public CommonResponse(@RequestBody @Valid CommonRequest<DataDTO> commonRequest) {
+ *      // 使用时只要直接使用getBody()方法就好了
+ *      DataDTO dataDTO = commonRequest.getBody();
+ *      ...
+ *  }
  *
  * @author 何家伟
- * @date 2019-08-09 23:02
- * @version 1.0
+ * @date 2019-08-14 23:02
+ * @version 2.0
  */
-public class CommonRequest {
+public class CommonRequest<T> {
     /**
      * head
      * 即从前端传来的请求报文头
      */
+    @Valid
     private CommonRequestHead head;
 
     /**
      * body
      * 即从前端传来的json数据
      */
-    private Map<String, Object> body;
+    @Valid
+    private T body;
 
     public CommonRequestHead getHead() {
         return head;
@@ -35,11 +41,11 @@ public class CommonRequest {
         this.head = head;
     }
 
-    public Map<String, Object> getBody() {
+    public T getBody() {
         return body;
     }
 
-    public void setBody(Map<String, Object> body) {
+    public void setBody(T body) {
         this.body = body;
     }
 

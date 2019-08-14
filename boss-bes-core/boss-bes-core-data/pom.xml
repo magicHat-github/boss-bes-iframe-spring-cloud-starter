@@ -12,11 +12,11 @@
     <artifactId>boss-bes-core-data</artifactId>
 
     <dependencies>
-        <!--spring-web-->
+        <!--Valid参数校验依赖-->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>5.1.8.RELEASE</version>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
         </dependency>
     </dependencies>
 </project>

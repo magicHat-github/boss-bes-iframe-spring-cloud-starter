@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 
 /**
  * 切面类
+ * 还未完善，需要后续增加加密、解密功能
  *
  * @author 何家伟
  * @version 1.0
@@ -37,9 +38,6 @@ public class CommonDataAspect {
         for (Field field: fields) {
             field.setAccessible(true);
             System.out.println(field.getName());
-            if ("category".equals(field.getName())) {
-                field.set(args[0], "切面修改的类别");
-            }
         }
         System.out.println(point.getTarget());
         System.out.println("=========================================");
