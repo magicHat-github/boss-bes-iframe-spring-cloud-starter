@@ -1,4 +1,4 @@
-package pojo.enums;
+package com.dao.aop.pojo.enums;
 
 /**
  * @author Lynch

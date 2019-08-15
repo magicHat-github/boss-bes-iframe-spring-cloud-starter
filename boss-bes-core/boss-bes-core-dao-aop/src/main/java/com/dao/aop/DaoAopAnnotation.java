@@ -1,8 +1,6 @@
-package annotation;
+package com.dao.aop;
 
-
-import pojo.enums.MethodType;
-
+import com.dao.aop.pojo.enums.MethodType;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

@@ -1,4 +1,4 @@
-package pojo.common;
+package com.dao.aop.pojo.common;
 
 import java.util.Date;
 
@@ -8,35 +8,35 @@ import java.util.Date;
  */
 public class InsertCommon {
 
-	private long orgId;
-	private long companyId;
-	private long createdBy;
+	private Long orgId;
+	private Long companyId;
+	private Long createdBy;
 	private Date createdTime;
-	private long updatedBy;
+	private Long updatedBy;
 	private Date updatedTime;
-	private long version;
+	private Long version;
 
-	public long getOrgId() {
+	public Long getOrgId() {
 		return orgId;
 	}
 
-	public void setOrgId(long orgId) {
+	public void setOrgId(Long orgId) {
 		this.orgId = orgId;
 	}
 
-	public long getCompanyId() {
+	public Long getCompanyId() {
 		return companyId;
 	}
 
-	public void setCompanyId(long companyId) {
+	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
 
-	public long getCreatedBy() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	public void setCreatedBy(long createdBy) {
+	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -48,11 +48,11 @@ public class InsertCommon {
 		this.createdTime = createdTime;
 	}
 
-	public long getUpdatedBy() {
+	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
-	public void setUpdatedBy(long updatedBy) {
+	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
@@ -64,18 +64,18 @@ public class InsertCommon {
 		this.updatedTime = updatedTime;
 	}
 
-	public long getVersion() {
+	public Long getVersion() {
 		return version;
 	}
 
-	public void setVersion(long version) {
+	public void setVersion(Long version) {
 		this.version = version;
 	}
 
 	public InsertCommon() {
 	}
 
-	public InsertCommon(long orgId, long companyId, long createdBy, Date createdTime, long updatedBy, Date updatedTime, long version) {
+	public InsertCommon(Long orgId, Long companyId, Long createdBy, Date createdTime, Long updatedBy, Date updatedTime, Long version) {
 		this.orgId = orgId;
 		this.companyId = companyId;
 		this.createdBy = createdBy;

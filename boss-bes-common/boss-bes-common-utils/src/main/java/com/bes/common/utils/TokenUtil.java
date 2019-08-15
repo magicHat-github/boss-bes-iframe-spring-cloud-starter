@@ -9,6 +9,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -23,13 +25,15 @@ public class TokenUtil {
      * @param tokenStr 字符串 JWT中token的key
      * @return Map<String,String>
      */
-    public static Map<String,String> getCommonParamsFromToken(String headStr,String tokenStr){
+    public static Map<String,String> getCommonParamsFromToken(String headStr,String tokenStr) throws IOException {
         Map<String,String> stringMap = null;
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         if (requestAttributes != null){
             HttpServletRequest request = requestAttributes.getRequest();
-            String head = request.getParameter(headStr);
-            JSONObject jsonObject = JSON.parseObject(head);
+            String body = getRequestBody(request);
+            JSONObject jsonObject = JSON.parseObject(body);
+            String head = jsonObject.get(headStr).toString();
+            jsonObject = JSON.parseObject(head);
             String token = jsonObject.get(tokenStr).toString();
             stringMap = JwtUtil.verifyToken(token);
         }
@@ -45,5 +49,21 @@ public class TokenUtil {
     public static JSONObject getCommonParamsFromRedis(String userId, StringRedisTemplate stringRedisTemplate){
         String data = stringRedisTemplate.opsForValue().get(userId);
         return JSON.parseObject(data);
+    }
+
+    /**
+     * 获取request的body
+     * @param request  request
+     * @return String
+     * @throws IOException IOException
+     */
+    public static String getRequestBody(HttpServletRequest request) throws IOException {
+        BufferedReader br = request.getReader();
+        String str = "";
+        StringBuilder listString = new StringBuilder();
+        while ((str = br.readLine()) != null) {
+            listString.append(str);
+        }
+        return listString.toString();
     }
 }
