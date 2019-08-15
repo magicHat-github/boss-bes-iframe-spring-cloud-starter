@@ -26,7 +26,7 @@ public class ExceptionAspect {
     @Resource
     private Handle handle;
 
-    Logger logger = LoggerFactory.getLogger(ExceptionAspect.class);
+    private Logger logger = LoggerFactory.getLogger(ExceptionAspect.class);
 
     @Pointcut("@annotation(annotion.ExceptionHandle)")
     public  void serviceAspect() { }
@@ -41,7 +41,7 @@ public class ExceptionAspect {
       */
     @AfterThrowing(throwing = "ex",pointcut = "serviceAspect()")
     public void afterthrowing(AppException ex){
-        //System.out.println(ex.getClass());
+        logger.error("Error found: ", ex);
         handle.handle(ex);
     }
     }

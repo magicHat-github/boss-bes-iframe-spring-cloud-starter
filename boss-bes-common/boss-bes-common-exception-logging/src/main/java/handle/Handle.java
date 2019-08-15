@@ -27,8 +27,6 @@ import java.util.List;
  */
 @ControllerAdvice
 public class Handle {
-    private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);
-
     /**
       * 全局异常处理
       * 自定义异常  表单验证异常 和 未定义系统异常的处理
@@ -60,8 +58,6 @@ public class Handle {
 
             return ResponseUtil.buildError("1000",errorMessages.toString());
         } else {
-
-            logger.error("!!!系统异常!!!，{}", e.getMessage());
             return ResponseUtil.buildError(ResultEnum.SYSTEM_ERROR);
         }
     }
