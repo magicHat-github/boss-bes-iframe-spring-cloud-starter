@@ -19,23 +19,23 @@
     </properties>
     <dependencies>
         <!--spring-context-->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>5.1.8.RELEASE</version>
-        </dependency>
-        <!--切面-->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.4</version>
-        </dependency>
-        <!--日志-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.26</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context</artifactId>-->
+            <!--<version>5.1.8.RELEASE</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;切面&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.aspectj</groupId>-->
+            <!--<artifactId>aspectjweaver</artifactId>-->
+            <!--<version>1.9.4</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash;日志&ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-api</artifactId>-->
+            <!--<version>1.7.26</version>-->
+        <!--</dependency>-->
         <!-- fastjson -->
         <dependency>
             <groupId>com.alibaba</groupId>
