@@ -1,15 +1,16 @@
 package com.bes.common.logging.aspect;
 
-import com.bes.common.logging.annotation.MethodLog;
-import com.bes.common.logging.util.DateUtil;
+import com.bes.common.logging.annotation.ApiLog;
+import com.bes.common.logging.util.ApiLogDateUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * 函数日志的切面
@@ -18,20 +19,20 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Aspect
-public class MethodLogAop {
+public class ApiLogAop {
     /**
      * 日志输出对象
      */
-    private Logger logger = LoggerFactory.getLogger(MethodLogAop.class);
+    private Logger logger = LoggerFactory.getLogger(ApiLogAop.class);
     /**
      * 时间工具对象
      */
-    @Autowired
-    private DateUtil dateUtil = null;
+    @Resource
+    private ApiLogDateUtil apiLogDateUtil = null;
     /**
      * 切点为我的注解,只要有这个注解的都可以切
      */
-    @Pointcut("@annotation(com.bes.common.logging.annotation.MethodLog)")
+    @Pointcut("@annotation(com.bes.common.logging.annotation.ApiLog)")
     public void pointCut(){}
 
     /**
@@ -42,7 +43,7 @@ public class MethodLogAop {
      * @throws Throwable 抛出产生的异常
      */
     @Around(value = "pointCut()&&@annotation(logAnnotation)",argNames = "joinPoint,logAnnotation")
-    public Object around(ProceedingJoinPoint joinPoint,MethodLog logAnnotation) throws Throwable{
+    public Object around(ProceedingJoinPoint joinPoint, ApiLog logAnnotation) throws Throwable{
         // 获得注解上的值
         String annotationValue = logAnnotation.value();
         // 调用方法前的日志
@@ -55,7 +56,7 @@ public class MethodLogAop {
         for (int i = 0; i<args.length; i++){
             logger.info("parameter={},value={}",i,args[i].toString());
         }
-        String startRunTime =dateUtil.getStringTime();
+        String startRunTime = apiLogDateUtil.getStringTime();
         String log = "方法:"+method+"实际开始执行时间:"+startRunTime;
         logger.info(log);
         /*
@@ -74,7 +75,7 @@ public class MethodLogAop {
         /*
          * 执行结束时间
          */
-        logger.info("执行结束时间:{}",dateUtil.getStringTime());
+        logger.info("执行结束时间:{}", apiLogDateUtil.getStringTime());
         logger.info("执行{}函数的的返回结果{}",method,ret);
         return ret;
     }

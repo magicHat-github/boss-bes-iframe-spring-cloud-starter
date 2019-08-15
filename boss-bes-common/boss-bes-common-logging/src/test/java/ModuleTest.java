@@ -1,6 +1,5 @@
-import com.bes.common.logging.annotation.MethodLog;
+import com.bes.common.logging.annotation.ApiLog;
 import org.junit.Test;
-import org.springframework.stereotype.Component;
 
 /**
  * 模块测试
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class ModuleTest {
 
     class A {
-        @MethodLog
+        @ApiLog
         public String hello(String name){
             System.out.println("name");
             return "hello "+name;

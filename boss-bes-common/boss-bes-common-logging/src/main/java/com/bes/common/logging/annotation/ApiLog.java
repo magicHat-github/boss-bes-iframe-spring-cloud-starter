@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MethodLog {
+public @interface ApiLog {
     /**
      * 日志的存储位置
      * @return 返回存储路径

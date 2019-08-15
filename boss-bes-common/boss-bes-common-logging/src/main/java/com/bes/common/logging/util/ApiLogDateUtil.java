@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2019/8/12
  */
 @Component
-public class DateUtil {
+public class ApiLogDateUtil {
     private static Date date = new Date();
     private static ThreadLocal<DateFormat> threadLocal = new ThreadLocal<DateFormat>(){
        @Override
