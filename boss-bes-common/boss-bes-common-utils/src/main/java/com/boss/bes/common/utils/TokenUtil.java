@@ -1,5 +1,6 @@
 package com.boss.bes.common.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -21,7 +22,7 @@ public class TokenUtil {
      * 从request里面解密出放入JWT token的自定义集合数据
      * @param headStr 字符串 request中head的key
      * @param tokenStr 字符串 JWT中token的key
-     * @return Map<String,String>
+     * @return Map<String,String> OR null
      */
     public static Map<String,String> getCommonParamsFromToken(String headStr,String tokenStr) throws IOException {
         Map<String,String> stringMap = null;
@@ -29,11 +30,17 @@ public class TokenUtil {
         if (requestAttributes != null){
             HttpServletRequest request = requestAttributes.getRequest();
             String body = getRequestBody(request);
-            JSONObject jsonObject = JSON.parseObject(body);
-            String head = jsonObject.get(headStr).toString();
-            jsonObject = JSON.parseObject(head);
-            String token = jsonObject.get(tokenStr).toString();
-            stringMap = JwtUtil.verifyToken(token);
+            if(StrUtil.isNotEmpty(body)) {
+                JSONObject jsonObject = JSON.parseObject(body);
+                String head = jsonObject.get(headStr).toString();
+                if (StrUtil.isNotEmpty(head)) {
+                    jsonObject = JSON.parseObject(head);
+                    String token = jsonObject.get(tokenStr).toString();
+                    if (StrUtil.isNotEmpty(token)) {
+                        stringMap = JwtUtil.verifyToken(token);
+                    }
+                }
+            }
         }
         return stringMap;
     }
@@ -42,11 +49,11 @@ public class TokenUtil {
      * 获取每个用户在redis里面缓存的公用数据
      * @param userId 用户编号，redis里面的Key
      * @param stringRedisTemplate RedisTemplate处理字符串的类
-     * @return JSONObject
+     * @return JSONObject OR null
      */
     public static JSONObject getCommonParamsFromRedis(String userId, StringRedisTemplate stringRedisTemplate){
         String data = stringRedisTemplate.opsForValue().get(userId);
-        return JSON.parseObject(data);
+        return StrUtil.isNotEmpty(data)?JSON.parseObject(data):null;
     }
 
     /**

@@ -37,7 +37,11 @@ public enum ResultEnum {
     /**
      * 业务错误
      */
-    BUSINESS_ERROR("2000", "参数错误");
+    BUSINESS_ERROR("2000", "参数错误"),
+    /**
+     * 从请求体拿token内参数错误，或者从redis拿值错误
+     */
+    PARAMS_TOKEN_ERROR("1001", "获取自动填值参数错误");
 
     private String code;
     private String msg;

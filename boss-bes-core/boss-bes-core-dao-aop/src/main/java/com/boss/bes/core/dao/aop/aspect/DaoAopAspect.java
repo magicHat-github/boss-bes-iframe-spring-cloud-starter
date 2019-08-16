@@ -1,11 +1,14 @@
 package com.boss.bes.core.dao.aop.aspect;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.boss.bes.common.exception.logging.exception.DaoException;
 import com.boss.bes.common.utils.TokenUtil;
 import com.boss.bes.core.dao.aop.annotation.DaoAopAnnotation;
 import com.boss.bes.core.dao.aop.pojo.common.InsertCommon;
 import com.boss.bes.core.dao.aop.pojo.common.UpdateCommon;
 import com.boss.bes.core.dao.aop.pojo.enums.MethodType;
+import com.boss.bes.core.data.vo.ResultEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Date;
 import java.util.Map;
@@ -75,30 +79,38 @@ public class DaoAopAspect {
 	 * @param object 对象
 	 * @return 属性值
 	 */
-	private static Object getFieldValueByName(String fieldName, Object object) {
-		Object result = null;
-		try {
-			String firstLetter = fieldName.substring(0, 1).toUpperCase();
-			String getter = "get" + firstLetter + fieldName.substring(1);
-			Method method = object.getClass().getMethod(getter);
-			result = method.invoke(object);
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		return result;
+	private static Object getFieldValueByName(String fieldName, Object object) throws InvocationTargetException, IllegalAccessException, NoSuchMethodException {
+		String firstLetter = fieldName.substring(0, 1).toUpperCase();
+		String getter = "get" + firstLetter + fieldName.substring(1);
+		Method method = object.getClass().getMethod(getter);
+		return method.invoke(object);
 	}
 
 	/**
-	 * 获取JSONObject从request
-	 * @return JSONObject
+	 * 获取JSONObject从request和Redis
+	 * @return JSONObject OR null
+	 * @throws DaoException 参数异常，错误的可能是
+	 *  1、commonParamsFromToken 为 null
+	 *  2、从token里面拿用户ID错误
 	 */
 	private JSONObject getJsonObject() throws IOException {
 		Map<String, String> commonParamsFromToken = TokenUtil.getCommonParamsFromToken("head", "token");
-		String userId = commonParamsFromToken.get("id");
-		return TokenUtil.getCommonParamsFromRedis(userId,stringRedisTemplate);
+		if (commonParamsFromToken!=null){
+			String userId = commonParamsFromToken.get("id");
+			if (StrUtil.isNotEmpty(userId)) {
+				return TokenUtil.getCommonParamsFromRedis(userId, stringRedisTemplate);
+			}
+		}
+		throw new DaoException(ResultEnum.PARAMS_TOKEN_ERROR);
 	}
 
-	private static void inject2To1(Object objectFirst,Object objectSecond) throws IllegalAccessException {
+	/**
+	 * 填值，根据类属性进行填值
+	 * @param objectFirst 需要填值的对象
+	 * @param objectSecond 存在参数值的对象
+	 * @throws IllegalAccessException IllegalAccessException
+	 */
+	private static void inject2To1(Object objectFirst,Object objectSecond) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		Field[] firstFields = objectFirst.getClass().getDeclaredFields();
 		Field[] secondFields = objectSecond.getClass().getDeclaredFields();
 		for (Field 	firstField : firstFields) {
