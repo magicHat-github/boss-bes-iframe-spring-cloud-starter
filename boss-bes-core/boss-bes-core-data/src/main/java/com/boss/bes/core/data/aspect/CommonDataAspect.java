@@ -1,6 +1,8 @@
 package com.boss.bes.core.data.aspect;
 
 import com.alibaba.fastjson.JSON;
+import com.boss.bes.core.data.vo.CommonRequest;
+import com.boss.bes.core.data.vo.CommonResponse;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -32,19 +34,17 @@ public class CommonDataAspect {
 
     @Around("cutPoint()")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
+        // 获取版本和加密信息
         Object[] args = point.getArgs();
-        Field[] fields = args[0].getClass().getDeclaredFields();
-        System.out.println("请求开始，请求报文：");
-        for (Field field: fields) {
-            field.setAccessible(true);
-            System.out.println(field.getName());
-        }
-        System.out.println(point.getTarget());
-        System.out.println("=========================================");
+        CommonRequest commonRequest = (CommonRequest) args[0];
+        String version = commonRequest.getHead().getVersion();
+        Integer crypt = commonRequest.getHead().getCrypt();
 
-        // result的值就是被拦截方法的返回值
+        // 将版本和加密信息填入response
         Object result = point.proceed();
-        logger.info("请求结束，响应报文： " + JSON.toJSONString(result));
-        return result;
+        CommonResponse commonResponse = (CommonResponse) result;
+        commonResponse.getHead().setVersion(version);
+        commonResponse.getHead().setCrypt(crypt);
+        return commonResponse;
     }
 }
