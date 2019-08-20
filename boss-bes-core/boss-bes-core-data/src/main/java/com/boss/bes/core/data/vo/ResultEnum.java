@@ -41,7 +41,11 @@ public enum ResultEnum {
     /**
      * 从请求体拿token内参数错误，或者从redis拿值错误
      */
-    PARAMS_TOKEN_ERROR("1001", "获取自动填值参数错误");
+    PARAMS_TOKEN_ERROR("1001", "获取自动填值参数错误"),
+    /**
+     * 网关熔断超时错误
+     */
+    GATEWAY_HYSTRIX_TIMEOUT_ERROR("1002", "网关熔断超时错误");
 
     private String code;
     private String msg;
