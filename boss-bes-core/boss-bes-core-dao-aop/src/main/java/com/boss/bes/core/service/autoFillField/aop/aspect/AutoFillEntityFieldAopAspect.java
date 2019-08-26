@@ -1,13 +1,13 @@
-package com.boss.bes.core.dao.aop.aspect;
+package com.boss.bes.core.service.autoFillField.aop.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.boss.bes.common.exception.logging.exception.DaoException;
 import com.boss.bes.common.utils.TokenUtil;
-import com.boss.bes.core.dao.aop.annotation.DaoAopAnnotation;
-import com.boss.bes.core.dao.aop.pojo.common.InsertCommon;
-import com.boss.bes.core.dao.aop.pojo.common.UpdateCommon;
-import com.boss.bes.core.dao.aop.pojo.enums.MethodType;
+import com.boss.bes.core.service.autoFillField.aop.annotation.AutoFillEntityFieldAop;
+import com.boss.bes.core.service.autoFillField.aop.pojo.common.InsertCommon;
+import com.boss.bes.core.service.autoFillField.aop.pojo.common.UpdateCommon;
+import com.boss.bes.core.service.autoFillField.aop.pojo.enums.MethodType;
 import com.boss.bes.core.data.vo.ResultEnum;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -30,7 +30,7 @@ import java.util.Map;
  */
 @Aspect
 @Component
-public class DaoAopAspect {
+public class AutoFillEntityFieldAopAspect {
 
 	@Resource
 	private StringRedisTemplate stringRedisTemplate;
@@ -38,8 +38,8 @@ public class DaoAopAspect {
 	/**
 	 * 切点
 	 */
-	@Pointcut("@annotation(com.boss.bes.core.dao.aop.annotation.DaoAopAnnotation)")
-	public void daoAop() {
+	@Pointcut("@annotation(com.boss.bes.core.service.autoFillField.aop.annotation.AutoFillEntityFieldAop)")
+	public void autoFillAop() {
 	}
 
 	/**
@@ -47,8 +47,8 @@ public class DaoAopAspect {
 	 * @param joinPoint 切面方法
 	 * @return 返回值
 	 */
-	@Around("daoAop() && @annotation(daoAopAnnotation)")
-	public Object doAround(ProceedingJoinPoint joinPoint, DaoAopAnnotation daoAopAnnotation) throws Throwable {
+	@Around("autoFillAop() && @annotation(autoFillEntityFieldAop)")
+	public Object doAround(ProceedingJoinPoint joinPoint, AutoFillEntityFieldAop autoFillEntityFieldAop) throws Throwable {
 		// 获取切面参数及其属性域
 		Object[] args = joinPoint.getArgs();
 		JSONObject redisJsonObject = getJsonObject();
@@ -58,14 +58,14 @@ public class DaoAopAspect {
 		Long updatedBy = Long.parseLong(redisJsonObject.get("updatedBy").toString());
 
 		// 为不同的dao操作执行不同规则
-		if (MethodType.INSERT.equals(daoAopAnnotation.methodType())) {
+		if (MethodType.INSERT.equals(autoFillEntityFieldAop.methodType())) {
 			Long createdBy = Long.parseLong(redisJsonObject.get("createdBy").toString());
 			Long version = 0L;
 
 			InsertCommon commonString = new InsertCommon(orgId,companyId,createdBy,date,updatedBy,date,version);
 			inject2To1(args[0],commonString);
 
-		} else if (MethodType.UPDATE.equals(daoAopAnnotation.methodType())) {
+		} else if (MethodType.UPDATE.equals(autoFillEntityFieldAop.methodType())) {
 			// 对组织Id等在缓存中已经存在的进行改变时，需要对缓存和数据库同步更新
 			UpdateCommon commonString = new UpdateCommon(orgId,companyId,updatedBy,date);
 			inject2To1(args[0],commonString);

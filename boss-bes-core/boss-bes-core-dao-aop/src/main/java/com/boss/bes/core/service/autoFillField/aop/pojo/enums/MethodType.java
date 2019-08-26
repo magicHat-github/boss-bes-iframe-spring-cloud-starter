@@ -1,4 +1,4 @@
-package com.boss.bes.core.dao.aop.pojo.enums;
+package com.boss.bes.core.service.autoFillField.aop.pojo.enums;
 
 /**
  * @author Lynch

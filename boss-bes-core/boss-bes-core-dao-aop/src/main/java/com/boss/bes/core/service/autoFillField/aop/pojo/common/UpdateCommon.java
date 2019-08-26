@@ -1,4 +1,4 @@
-package com.boss.bes.core.dao.aop.pojo.common;
+package com.boss.bes.core.service.autoFillField.aop.pojo.common;
 
 import java.util.Date;
 
